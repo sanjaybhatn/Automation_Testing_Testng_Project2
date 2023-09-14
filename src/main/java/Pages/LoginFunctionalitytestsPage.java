@@ -1,5 +1,6 @@
 package Pages;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -83,6 +84,20 @@ public class LoginFunctionalitytestsPage extends BasePage {
 	private WebElement accountDeletedMessage;
 	@FindBy(xpath = "//p[contains(.,'Your account has been permanently deleted!')]")
 	private WebElement congratulationaccountDeletedMessage;
+
+	@FindBy(xpath = "//a[normalize-space()='Logout']")
+	private WebElement logoutButton;
+
+	@FindBy(xpath = "//h2[normalize-space()='Login to your account']")
+	private WebElement loginToyourAccountText;
+	@FindBy(xpath = "//input[@data-qa='login-email']")
+	private WebElement loginEmailTextField;
+	@FindBy(xpath = "//input[@placeholder='Password']")
+	private WebElement loginPasswordTextField;
+	@FindBy(xpath = "//button[normalize-space()='Login']")
+	private WebElement loginSubmitButton;
+	@FindBy(xpath = "//p[normalize-space()='Your email or password is incorrect!']")
+	private WebElement loginErrorMessage;
 
 	// Entering webSite Url
 	public void enterURl(String url) {
@@ -177,11 +192,10 @@ public class LoginFunctionalitytestsPage extends BasePage {
 		wait.until(ExpectedConditions.visibilityOf(daysDrop));
 		Select d_Select = new Select(daysDrop);
 		d_Select.selectByValue(day);
-	    monthsDrop.click();
-	    driver.findElement(By.xpath("//*[text()='"+month+"']")).click();
-	    yearsDrop.click();
-	    driver.findElement(By.xpath("//*[text()='"+year+"']")).click();
-		
+		monthsDrop.click();
+		driver.findElement(By.xpath("//*[text()='" + month + "']")).click();
+		yearsDrop.click();
+		driver.findElement(By.xpath("//*[text()='" + year + "']")).click();
 
 	}
 
@@ -297,7 +311,6 @@ public class LoginFunctionalitytestsPage extends BasePage {
 
 	// verifying accountDeleted succuss message
 	public void verifyAccountDeletedisVisibleandClickContinue() {
-		
 		wait.until(ExpectedConditions.visibilityOf(accountDeletedMessage));
 		String actualText1 = "ACCOUNT DELETED!";
 		String expectedText1 = accountDeletedMessage.getText();
@@ -306,6 +319,54 @@ public class LoginFunctionalitytestsPage extends BasePage {
 		Assert.assertEquals(true, actualText1.equals(expectedText1));
 		Assert.assertEquals(true, actualText2.equals(expectedText2));
 		continueButton.click();
+
+	}
+
+	// Clicking on Logout Button
+	public void clickOnlogoutButton() {
+		wait.until(ExpectedConditions.visibilityOf(logoutButton));
+		logoutButton.click();
+
+	}
+
+	// Verifying Login your account header
+	public void verifyLogintoyouraccountisVisible() {
+		wait.until(ExpectedConditions.visibilityOf(loginToyourAccountText));
+		String actualText = "Login to your account";
+		String expectedText = loginToyourAccountText.getText();
+		Assert.assertEquals(true, actualText.equals(expectedText));
+
+	}
+
+	// Entering Email id
+	public void enterLoginEmail(String email) {
+		wait.until(ExpectedConditions.visibilityOf(loginEmailTextField));
+		loginEmailTextField.clear();
+		loginEmailTextField.sendKeys(email);
+
+	}
+
+	// Entering Password
+	public void enterLoginPass(String password) {
+		wait.until(ExpectedConditions.visibilityOf(loginPasswordTextField));
+		loginPasswordTextField.clear();
+		loginPasswordTextField.sendKeys(password);
+
+	}
+
+	// Clicking on loginButton
+	public void clickOnlogin() {
+		wait.until(ExpectedConditions.visibilityOf(loginSubmitButton));
+		loginSubmitButton.click();
+
+	}
+
+	// Verifying Error Message
+	public void verifyErrorMessage() {
+		wait.until(ExpectedConditions.visibilityOf(loginErrorMessage));
+		String actualText = "Your email or password is incorrect!";
+		String expectedText = loginErrorMessage.getText();
+		Assert.assertEquals(true, actualText.equals(expectedText));
 
 	}
 
