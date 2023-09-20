@@ -1,5 +1,6 @@
 package testscases;
 
+import java.io.File;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 

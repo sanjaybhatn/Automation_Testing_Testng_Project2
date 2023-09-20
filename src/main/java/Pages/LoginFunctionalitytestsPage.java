@@ -84,10 +84,8 @@ public class LoginFunctionalitytestsPage extends BasePage {
 	private WebElement accountDeletedMessage;
 	@FindBy(xpath = "//p[contains(.,'Your account has been permanently deleted!')]")
 	private WebElement congratulationaccountDeletedMessage;
-
 	@FindBy(xpath = "//a[normalize-space()='Logout']")
 	private WebElement logoutButton;
-
 	@FindBy(xpath = "//h2[normalize-space()='Login to your account']")
 	private WebElement loginToyourAccountText;
 	@FindBy(xpath = "//input[@data-qa='login-email']")
@@ -98,6 +96,9 @@ public class LoginFunctionalitytestsPage extends BasePage {
 	private WebElement loginSubmitButton;
 	@FindBy(xpath = "//p[normalize-space()='Your email or password is incorrect!']")
 	private WebElement loginErrorMessage;
+	@FindBy(xpath = "//p[normalize-space()='Email Address already exist!']")
+	private WebElement EmailAddressAlreadyExistErrorMessage;
+	
 
 	// Entering webSite Url
 	public void enterURl(String url) {
@@ -368,6 +369,15 @@ public class LoginFunctionalitytestsPage extends BasePage {
 		String expectedText = loginErrorMessage.getText();
 		Assert.assertEquals(true, actualText.equals(expectedText));
 
+	}
+
+	//Varifying Exist Email Error Message
+	public void ValidateExistingmailErrorMessage() {
+		wait.until(ExpectedConditions.visibilityOf(EmailAddressAlreadyExistErrorMessage));
+		String actualText = "Email Address already exist!";
+		String expectedText = EmailAddressAlreadyExistErrorMessage.getText();
+		Assert.assertEquals(true, actualText.equals(expectedText));
+		
 	}
 
 }
