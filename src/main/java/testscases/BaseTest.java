@@ -1,6 +1,9 @@
 package testscases;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -27,8 +30,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import listeners.LogListener;
 import listeners.ReportListener;
 import util.LoggerUtil;
-
-
 
 @Listeners({ ReportListener.class, LogListener.class })
 public class BaseTest {
@@ -57,11 +58,14 @@ public class BaseTest {
 
 	@BeforeMethod
 	protected void setup() throws Exception {
-		test = ObjectRepository.ObjectRepo(System.getProperty("user.dir")+"//src//test//resources//configuration//test.properties");
+		test = ObjectRepository
+				.ObjectRepo(System.getProperty("user.dir") + "//src//test//resources//configuration//test.properties");
 		if (test.getProperty("browser").equals("chrome")) {
-			WebDriverManager.chromedriver().setup();
+
+			Map<String, Object> Prefs = new HashMap<String, Object>();
+			Prefs.put("download.default_directory", System.getProperty("user.dir") + File.separator + "downloads");
 			ChromeOptions ops = new ChromeOptions();
-			ops.addArguments("disable-infobars");
+			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver(ops);
 
 		}

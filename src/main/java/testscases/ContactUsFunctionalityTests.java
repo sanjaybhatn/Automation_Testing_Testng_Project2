@@ -27,10 +27,9 @@ public class ContactUsFunctionalityTests extends BaseTest {
 		contactusFunction.verifyingSuccussMessage();
 		contactusFunction.verifyUserInHomePage();
 		loginFunction.validateHomePage("Automation Exercise");
-		
 
 	}
-	
+
 	@Test(testName = "Test Case 7: Verify Test Cases Page")
 	public void testcasesPageValidation() throws Exception {
 		LoginFunctionalitytestsPage loginFunction = PageinstancesFactory.getInstance(LoginFunctionalitytestsPage.class);
@@ -40,9 +39,6 @@ public class ContactUsFunctionalityTests extends BaseTest {
 				.getInstance(ContactUsFunctionalityPage.class);
 		contactusFunction.clickonTestCasesButton();
 		contactusFunction.validateUserisinTestcasesPage();
-
-		
-		
 
 	}
 }

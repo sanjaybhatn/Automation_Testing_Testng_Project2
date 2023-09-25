@@ -1,5 +1,7 @@
 package Pages;
 
+import java.util.ArrayList;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -98,7 +100,6 @@ public class LoginFunctionalitytestsPage extends BasePage {
 	private WebElement loginErrorMessage;
 	@FindBy(xpath = "//p[normalize-space()='Email Address already exist!']")
 	private WebElement EmailAddressAlreadyExistErrorMessage;
-	
 
 	// Entering webSite Url
 	public void enterURl(String url) {
@@ -371,13 +372,13 @@ public class LoginFunctionalitytestsPage extends BasePage {
 
 	}
 
-	//Varifying Exist Email Error Message
+	// Varifying Exist Email Error Message
 	public void ValidateExistingmailErrorMessage() {
 		wait.until(ExpectedConditions.visibilityOf(EmailAddressAlreadyExistErrorMessage));
 		String actualText = "Email Address already exist!";
 		String expectedText = EmailAddressAlreadyExistErrorMessage.getText();
 		Assert.assertEquals(true, actualText.equals(expectedText));
-		
+
 	}
 
 }
